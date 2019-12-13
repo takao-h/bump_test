@@ -1,30 +1,22 @@
-import React, { useState, useEffect } from "react";
-
+import { useState, useEffect } from "react";
+import { Gyroscope } from "motion-sensors-polyfill"
+// const deviceOrientationEvent:any = new DeviceOrientationEvent()
+let gyroscope = new Gyroscope({ frequency: 15 });
 function useJailoVal() {
-  const isClient = typeof typeof window === 'object';
-  function getVecValue() {
-    return {
-      alpha: isClient ? "" : undefined,
-      beta: isClient ? "" : undefined,
-      gamma: isClient ? "" : undefined
-    };
-  }
-  let [jailo, setJailoValues] = useState(getVecValue)
+  let [alpha, setAlpha] = useState(window.DeviceOrientationEvent)
+  let [beta, setBeta] = useState(window.DeviceOrientationEvent)
+  let [gamma, setGamma] = useState(window.DeviceOrientationEvent)
 
   useEffect(() => {
-    if (!isClient) {
-      return false
+    const handler = () => {
+      setAlpha(window.DeviceOrientationEvent)
+      setBeta(window.DeviceOrientationEvent)
+      setGamma(window.DeviceOrientationEvent)
     }
-
-    function handleSetVecValue() {
-      setJailoValues(getVecValue) 
-    }
-
-    window.addEventListener("deviceorientation", handleSetVecValue);
-    return () =>
-      window.removeEventListener("deviceorientation", handleSetVecValue);
-  }, []);
-  return jailo;
+    window.addEventListener('orientationEvent', handler)
+    return () => window.addEventListener('orientationEvent', handler)
+  }, [])
+  return [alpha, beta, gamma]
 }
 
 export default useJailoVal

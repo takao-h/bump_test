@@ -1,0 +1,1 @@
+export const agent:any = window.navigator.userAgent.toLowerCase()
