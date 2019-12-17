@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Gyroscope } from "motion-sensors-polyfill"
+// import { Gyroscope } from "motion-sensors-polyfill"
 // const deviceOrientationEvent:any = new DeviceOrientationEvent()
-let gyroscope = new Gyroscope({ frequency: 15 });
+// let gyroscope = new Gyroscope({ frequency: 15 });
 function useJailoVal() {
   let [alpha, setAlpha] = useState(window.DeviceOrientationEvent)
   let [beta, setBeta] = useState(window.DeviceOrientationEvent)
